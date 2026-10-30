@@ -10,11 +10,15 @@
 
     {% for post in posts %}
         <article class="post">
-            <h2>
-                <a href="{% url 'posts:page' slug=post.slug %}">
-                    {{ post.title }}
-                </a>
-            </h2>
+            <a href="{% url 'posts:page' slug=post.slug %}">
+                <h2>{{ post.title }}</h2>
+
+                <img src="{{ post.banner.url }}"
+                        alt="{{ post.title }}"
+                        width="400"
+                >
+            </a>
+
             <p>{{ post.date }} by {{ post.author }} </p>
             <p>{{ post.body }}</p>
         </article>

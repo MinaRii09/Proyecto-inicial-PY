@@ -49,7 +49,17 @@ document.addEventListener('DOMContentLoaded', function () {
     let marker;
 
     map.on('click', function (e) {
-
+        const lat = e.latlng.lat;
+        const lng = e.latlng.lng;
+        if (
+            lat < -33.15||
+            lat > -32.95||
+            lng < -71.75||
+            lng > -71.55
+        ) {
+            alert("Solo se permiten reportes dentro de Valparaíso.");
+            return;
+        }
         if (marker) {
             map.removeLayer(marker);
         }
