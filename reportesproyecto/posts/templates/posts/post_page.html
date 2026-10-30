@@ -14,5 +14,29 @@
         <h1>{{ post.title }}</h1>
             <p>{{ post.date }}</p>
             <p>{{ post.body }}</p>
+            <div id="map" style="height:400px;"></div>
     </section>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+
+    const map = L.map('map').setView(
+        [{{ post.latitude }}, {{ post.longitude }}],
+        14
+    );
+
+    L.tileLayer(
+        'https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}',
+        {
+            attribution: 'Tiles © Esri'
+        }
+    ).addTo(map);
+
+    L.marker([
+        {{ post.latitude }},
+        {{ post.longitude }}
+    ]).addTo(map);
+
+});
+</script>
+
 {% endblock %}

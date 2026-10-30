@@ -1,16 +1,77 @@
-{%extends 'layout.html'%}
+{% extends 'layout.html' %}
 
 {% block title %}
     New Post
 {% endblock %}
 
 {% block content %}
-    <section>
-        <h1>New Post</h1>
-        <form class="form-with-validation" action="{% url 'posts:new-post' %}" method="post" enctype="multipart/form-data">
-            {% csrf_token %}
-            {{ form }}
-            <button class="form-submit">Add Post</button>
-        </form>
-    </section>
+
+<section>
+
+    <h1>New Post</h1>
+
+    <form class="form-with-validation"
+          action="{% url 'posts:new-post' %}"
+          method="post"
+          enctype="multipart/form-data">
+
+        {% csrf_token %}
+
+        {{ form }}
+
+        <div id="map" style="height:500px;"></div>
+
+        <br>
+
+        <button class="form-submit">
+            Add Post
+        </button>
+
+    </form>
+
+</section>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+
+    const map = L.map('map').setView(
+        [-33.0472, -71.6127],
+        13
+    );
+
+    L.tileLayer(
+        'https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}',
+        {
+            attribution: 'Tiles © Esri'
+        }
+    ).addTo(map);
+
+    let marker;
+
+    map.on('click', function (e) {
+
+        if (marker) {
+            map.removeLayer(marker);
+        }
+
+        marker = L.marker(e.latlng).addTo(map);
+
+        document.getElementById('id_latitude').value =
+            e.latlng.lat;
+
+        document.getElementById('id_longitude').value =
+            e.latlng.lng;
+
+        console.log(
+            'Lat:',
+            e.latlng.lat,
+            'Lng:',
+            e.latlng.lng
+        );
+
+    });
+
+});
+</script>
+
 {% endblock %}

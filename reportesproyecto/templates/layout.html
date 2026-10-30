@@ -10,6 +10,10 @@
         {% endblock %}
     </title>
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link
+        rel="stylesheet"
+        href="https://unpkg.com/leaflet/dist/leaflet.css"
+    />
     <script src="{% static 'js/main.js' %}" defer></script>
 </head>
 <body>
@@ -34,5 +38,7 @@
         {% block content %}
         {% endblock %}
     </main>
+
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 </body>
 </html>
