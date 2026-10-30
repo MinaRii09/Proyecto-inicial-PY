@@ -18,12 +18,12 @@
 </head>
 <body>
     <nav>
-        <a href="/">Home</a> |
-        <a href="/about">About</a> |
-        <a href="{% url 'posts:list' %}">Posts</a> |
+        <a href="/">Inicio</a> |
+        <a href="/about">Info</a> |
+        <a href="{% url 'posts:list' %}">Reportes</a> |
         
         {% if user.is_authenticated %}
-            <a href="{% url 'posts:new-post' %}">New Post</a> |
+            <a href="{% url 'posts:new-post' %}">Nuevo Reporte</a> |
             <a href="/admin">Admin</a> |
             <form class="logout" action="{% url 'users:logout' %}" method="post">
                 {% csrf_token %}
