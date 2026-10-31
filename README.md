@@ -1,4 +1,4 @@
-Repositorio para Proyecto de Reportes sobre Patrimonio
+Repositorio para Proyecto de Reportes sobre Patrimonio:
 
 Para hacer uso del proyecto se debe seguir las siguientes indicaciones:
 
