@@ -8,7 +8,6 @@ class CreatePost(forms.ModelForm):
         fields = [
             'title',
             'body',
-            'slug',
             'banner',
             'categoria',
             'latitude',

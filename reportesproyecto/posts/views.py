@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from .models import Post
 from django.contrib.auth.decorators import login_required
 from . import forms
@@ -10,8 +10,8 @@ def posts_list(request):
     return render(request, 'posts/posts_list.html', {'posts' : posts})
 
 
-def post_page(request, slug):
-    post = Post.objects.get(slug=slug)
+def post_page(request, pk):
+    post = get_object_or_404(Post, pk=pk)
     return render(request, 'posts/post_page.html', {'post' : post})
 
 @login_required(login_url="/users/login/")

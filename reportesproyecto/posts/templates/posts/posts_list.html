@@ -1,16 +1,16 @@
 {%extends 'layout.html'%}
 
 {% block title %}
-    Posts
+    Reportes
 {% endblock %}
 
 {% block content %}
     <section>
-    <h1>Posts</h1>
+    <h1>Reportes</h1>
 
     {% for post in posts %}
         <article class="post">
-            <a href="{% url 'posts:page' slug=post.slug %}">
+            <a href="{% url 'posts:page' pk=post.pk %}">
                 <h2>{{ post.title }}</h2>
 
                 <img src="{{ post.banner.url }}"
