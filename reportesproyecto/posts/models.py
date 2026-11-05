@@ -9,7 +9,6 @@ class Post(models.Model):
         validators=[
             MinLengthValidator(200, message="El reporte debe tener una descripción del al menos 200 caracteres.")]
     )
-    slug = models.SlugField()
     date = models.DateTimeField(auto_now_add=True)
     banner = models.ImageField(default='fallback.png', blank=True)
     author = models.ForeignKey(User, on_delete=models.CASCADE, default=None)
