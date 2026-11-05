@@ -112,3 +112,95 @@ a:hover {
 .logout-button:hover {
     opacity: .85;
 }
+body {
+    background-color: #f1f5f9;
+    margin: 0;
+    position: relative;
+}
+
+.bg-hero-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 420px;
+    overflow: hidden;
+    z-index: 1;
+    pointer-events: none;
+    -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0) 100%);
+    mask-image: linear-gradient(to bottom, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0) 100%);
+}
+
+.bg-hero-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 25%;
+    filter: blur(10px);
+    transform: scale(1.08);
+}
+
+.main-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: calc(100vh - 80px);
+    width: 100%;
+    padding: 20px;
+    box-sizing: border-box;
+    position: relative;
+    z-index: 2;
+}
+
+.center-card {
+    background: rgba(255, 255, 255, 0.96);
+    border: 1px solid rgba(203, 213, 225, 0.8);
+    border-top: 4px solid #1e3a8a;
+    border-radius: 8px;
+    padding: 55px 45px;
+    text-align: center;
+    max-width: 520px;
+    width: 100%;
+    margin: 0 auto;
+    box-shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
+    box-sizing: border-box;
+}
+
+.main-title {
+    font-family: 'Georgia', 'Times New Roman', serif;
+    font-size: 2.6rem;
+    font-weight: bold;
+    color: #1e3a8a;
+    margin: 0 0 12px 0;
+    letter-spacing: -0.5px;
+}
+
+.subtitle {
+    font-family: 'Georgia', 'Times New Roman', serif;
+    font-size: 1.15rem;
+    font-style: italic;
+    color: #64748b;
+    margin: 0 0 35px 0;
+}
+
+.btn-primary {
+    display: inline-block;
+    background-color: #1e3a8a;
+    color: #ffffff;
+    font-family: 'Georgia', 'Times New Roman', serif;
+    font-size: 1.05rem;
+    font-weight: 600;
+    padding: 13px 32px;
+    border-radius: 6px;
+    text-decoration: none;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.btn-primary:hover {
+    background-color: #1d4ed8;
+    transform: translateY(-1px);
+}
+
+nav, nav a, nav button {
+    font-family: 'Georgia', 'Times New Roman', serif !important;
+}
