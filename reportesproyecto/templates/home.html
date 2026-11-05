@@ -1,10 +1,15 @@
-{%extends 'layout.html' %}
-
-{% block title %}
-    Inicio
-{% endblock %}
+{% extends 'layout.html' %}
 
 {% block content %}
-    <h1 style="text-align: center;font-size: 75px;">SalvaRamos</h1>
-    <p style="text-align: center;font-size: 50px">Proyecto de Reportes</p>
+<div class="bg-hero-container">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/d/d4/107603-valparaiso-cerroalegre-sernatur-atr174.jpg" class="bg-hero-img" alt="Valparaíso">
+</div>
+
+<div class="main-wrapper">
+  <div class="center-card">
+    <h1 class="main-title">SalvaRamos</h1>
+    <p class="subtitle">Proyecto de Reportes</p>
+    <a href="{% url 'posts:new-post' %}" class="btn-primary">Nuevo Reporte</a>
+  </div>
+</div>
 {% endblock %}
