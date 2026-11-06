@@ -1,15 +1,21 @@
 {% extends 'layout.html' %}
+{% load static %}
+
+{% block main_class %}{% endblock %}
 
 {% block content %}
-<div class="bg-hero-container">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/d/d4/107603-valparaiso-cerroalegre-sernatur-atr174.jpg" class="bg-hero-img" alt="Valparaíso">
-</div>
+<section class="hero">
+    <img src="{% static 'images/cerro.jpg' %}" class="hero-img" alt="Cerro Alegre, Valparaíso">
+    <div class="hero-overlay"></div>
 
-<div class="main-wrapper">
-  <div class="center-card">
-    <h1 class="main-title">SalvaRamos</h1>
-    <p class="subtitle">Proyecto de Reportes</p>
-    <a href="{% url 'posts:new-post' %}" class="btn-primary">Nuevo Reporte</a>
-  </div>
-</div>
+    <div class="hero-content">
+        <h1 class="main-title">Cuidemos el patrimonio de Valparaíso</h1>
+        <p class="subtitle">
+            Reporta fachadas, escaleras, murales y espacios dañados en la zona patrimonial,
+            con foto y ubicación en el mapa.
+        </p>
+        <a href="{% url 'posts:new-post' %}" class="btn-primary">Reportar un daño</a>
+        <a href="{% url 'posts:list' %}" class="btn-secondary">Ver reportes</a>
+    </div>
+</section>
 {% endblock %}

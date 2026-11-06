@@ -1,112 +1,236 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+/* ============================================================
+   SalvaRamos - estilos globales
+   Paleta inspirada en los cerros de Valparaíso
+   ============================================================ */
+:root {
+    --azul:     #1f3a5f;   /* mar profundo */
+    --azul-osc: #14263f;
+    --mostaza:  #e0a526;   /* casas amarillas */
+    --verde:    #2e7d6b;   /* postigos verdes */
+    --coral:    #c8553d;   /* errores / alertas */
+    --fondo:    #f1f5f9;
+    --texto:    #1e293b;
+    --borde:    #cbd5e1;
 }
+
+* { box-sizing: border-box; }
 
 body {
-    min-height: 100vh;
-    background-color: white;
-    color: #81dbb8;
-    font-size: 3rem;
+    margin: 0;
+    background: var(--fondo);
+    color: var(--texto);
+    font-family: "Source Sans 3", system-ui, sans-serif;
+    font-size: 18px;
+    line-height: 1.6;
 }
 
-nav {
-    padding: 1rem;
-    background-color: #ffffff;
-    color: rgb(0, 0, 0);
-    font-size: 2.5rem;
+h1, h2, h3 {
+    font-family: "Bricolage Grotesque", system-ui, sans-serif;
+    color: var(--azul);
+    line-height: 1.15;
 }
 
-main {
-    padding: 1rem;
-}
+a { color: var(--verde); }
 
-section {
+/* ---------- Barra de navegación ---------- */
+.navbar {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
     display: flex;
-    flex-flow: column;
-    gap: 1rem;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem 1.5rem;
+    padding: 0.75rem 1.5rem;
+    background: var(--azul);
+    border-bottom: 4px solid var(--mostaza);
 }
 
-h1,
-h2 {
-    font-size: 2.5rem;
-}
-
-p {
-    font-size: 1rem;
-}
-
-a {
+.navbar-brand {
+    font-family: "Bricolage Grotesque", sans-serif;
+    font-weight: 800;
+    font-size: 1.4rem;
+    color: #fff;
     text-decoration: none;
-    color: #000000;
 }
 
-a:hover {
-    opacity: .85;
-}
-
-.banner {
-    display: block;
-    width: 100%;
-    max-width: 800px;
-}
-
-.form-with-validation {
-    max-width: 600px;
-    font-size: 1rem;
-    padding: 1rem;
+.navbar-links {
     display: flex;
-    flex-flow: column;
-    gap: 1rem;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.25rem 1.25rem;
 }
 
-.form-with-validation div {
-    display: flex;
-    flex-flow: column;
-    gap: 0.5rem;
-}
-
-.form-with-validation input {
-    padding: 0.25rem;
-    max-width: 300px;
-}
-
-.form-submit {
-    padding: 0.5rem;
-    border-radius: 10px;
-    width: 125px;
-}
-
-.helptext {
-    font-size: 1rem;
-    margin-left: 1rem;
-}
-
-.helptext ul {
-    list-style-type: none;
-}
-
-.errorlist {
-    color: #F00;
-    margin-left: 2rem;
-}
-
-.errorlist li::marker {
-    content: '🚨 ';
-}
-
-
-.logout {
-    display: inline-block;
-}
-
+.navbar-links a,
 .logout-button {
-    font-size: 2.5rem;
-    background-color: #3347e1;
+    color: #e2e8f0;
+    text-decoration: none;
+    font: inherit;
+    font-size: 1rem;
+    background: none;
     border: none;
+    padding: 0.25rem 0;
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
 }
 
+.navbar-links a:hover,
 .logout-button:hover {
-    opacity: 0.85;
+    color: #fff;
+    border-bottom-color: var(--mostaza);
 }
+
+.logout { display: inline; margin: 0; }
+
+.navbar-links .nav-cta {
+    background: var(--mostaza);
+    color: var(--azul-osc);
+    font-weight: 600;
+    padding: 0.4rem 1rem;
+    border-radius: 6px;
+    border-bottom: none;
+}
+.navbar-links .nav-cta:hover { background: #f0b73a; color: var(--azul-osc); }
+
+/* ---------- Contenedor de páginas normales ---------- */
+.container {
+    max-width: 860px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(20, 38, 63, 0.12);
+}
+
+@media (max-width: 600px) {
+    .container { margin: 1rem; padding: 1.25rem; }
+}
+
+/* ---------- Formularios (dentro de .container) ---------- */
+.container form p,
+.container form > div { margin-bottom: 1.25rem; }
+
+.container label {
+    display: block;
+    margin-bottom: 0.3rem;
+    font-weight: 600;
+    color: var(--azul);
+}
+
+.container input[type="text"],
+.container input[type="email"],
+.container input[type="password"],
+.container input[type="number"],
+.container textarea,
+.container select {
+    width: 100%;
+    padding: 0.6rem 0.75rem;
+    font: inherit;
+    border: 1px solid var(--borde);
+    border-radius: 6px;
+    background: #fff;
+}
+
+.container input:focus,
+.container textarea:focus,
+.container select:focus {
+    outline: 3px solid rgba(46, 125, 107, 0.35);
+    border-color: var(--verde);
+}
+
+.container input[type="file"] {
+    font: inherit;
+    color: var(--texto);
+}
+
+.container button[type="submit"],
+.container input[type="submit"] {
+    background: var(--azul);
+    color: #fff;
+    border: none;
+    padding: 0.7rem 1.5rem;
+    border-radius: 6px;
+    font: inherit;
+    font-weight: 600;
+    cursor: pointer;
+}
+.container button[type="submit"]:hover,
+.container input[type="submit"]:hover { background: var(--azul-osc); }
+
+/* Mensajes de error de Django */
+.errorlist {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 0.5rem;
+    color: var(--coral);
+    font-weight: 600;
+}
+
+/* Mapa de Leaflet */
+.container #map,
+.container .leaflet-container {
+    height: 380px;
+    border-radius: 8px;
+    border: 1px solid var(--borde);
+}
+
+/* ---------- Portada ---------- */
+.hero {
+    position: relative;
+    min-height: calc(100vh - 70px);
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+}
+
+.hero-img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Capa oscura para que el texto se lea sobre la foto */
+.hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, rgba(20, 38, 63, 0.88) 0%, rgba(20, 38, 63, 0.45) 60%, rgba(20, 38, 63, 0.15) 100%);
+}
+
+.hero-content {
+    position: relative;
+    max-width: 640px;
+    padding: 2rem 1.5rem 2rem 6vw;
+    color: #fff;
+}
+
+.main-title {
+    margin: 0 0 1rem;
+    font-size: clamp(2.2rem, 6vw, 4rem);
+    font-weight: 800;
+    color: #fff;
+}
+
+.subtitle {
+    margin: 0 0 2rem;
+    font-size: 1.2rem;
+    color: #e2e8f0;
+}
+
+.btn-primary,
+.btn-secondary {
+    display: inline-block;
+    margin: 0 0.5rem 0.5rem 0;
+    padding: 0.8rem 1.6rem;
+    border-radius: 6px;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.btn-primary { background: var(--mostaza); color: var(--azul-osc); }
+.btn-primary:hover { background: #f0b73a; }
+
+.btn-secondary { border: 2px solid #fff; color: #fff; }
+.btn-secondary:hover { background: rgba(255, 255, 255, 0.15); }
