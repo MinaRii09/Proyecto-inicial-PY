@@ -1,70 +1,121 @@
-Repositorio para Proyecto de Reportes sobre Patrimonio:
+# Sistema de Reportes sobre Patrimonio Cultural de Valparaíso
+**Aplicación web desarrollada con *Django* que permite a los usuarios registrar reportes patrimoniales georreferenciados, adjuntar imágenes, clasificarlos por categoría y exportar la información en formato Excel junto con las imágenes asociadas.**
 
-Para hacer uso del proyecto se debe seguir las siguientes indicaciones:
+## Características
++ Registro e inicio de sesión de usuarios.
++ Creación de reportes patrimoniales.
++ Adjuntar imágenes a los reportes.
++ Registro de ubicación mediante coordenadas geográficas.
++ Clasificación por categorías patrimoniales.
++ Visualización detallada de reportes.
++ Exportación de reportes a Excel (.xlsx).
++ Exportación de imágenes y datos en un archivo comprimido (.zip).
++ Hoja de resumen con estadísticas generales.
++ Enlaces directos a Google Maps para cada reporte.
+## Requisitos
++ *Python* 3.14 o superior.
++ *Django* 6.1.2.
++ *Pillow*.
++ *OpenPyXL*.
+## Instalación
+### 1. Clonar el repositorio
+`git clone` https://github.com/MinaRii09/Proyecto-inicial-PY.git
 
-1. Requisitos
-Antes de ejecutar el proyecto, asegúrate de tener instalado:
+`cd reportesproyecto`
 
-    Python 3.12 (o la versión que uses)
-    pip
-    Git
+### 2. Crear un entorno virtual
+Windows:
 
-2. Clonar el repositorio
+`python -m venv venv`
 
-git clone https://github.com/usuario/nombre-repositorio.git
-cd nombre-repositorio
-
-3. Crear y activar entorno virtual
-Windows
-
-python -m venv venv
 venv\Scripts\activate
 
-Linux/macOS
+Linux / macOS:
 
-python3 -m venv venv
-source venv/bin/activate
+`python3 -m venv venv`
 
-4. Instalar dependencias
+`source venv/bin/activate`
 
-pip install -r requirements.txt
+### 3. Instalar dependencias
+`pip install -r` requirements.txt
 
-5. Aplicar migraciones
+Si no existe el archivo *requirements.txt*, instalar manualmente:
 
-python manage.py migrate
+`pip install` django
 
-6. Crear usuario administrador (opcional):
+`pip install` pillow
 
-python manage.py createsuperuser
+`pip install` openpyxl
 
-7. Ejecutar el servidor
+### 4. Aplicar migraciones
+`python manage.py migrate`
 
-python manage.py runserver
+### 5. Crear un usuario administrador
+`python manage.py createsuperuser`
 
-La aplicación estará disponible en:
+**Completar los datos solicitados por consola.**
 
-http://127.0.0.1:8000/
+### 6. Ejecutar el servidor
+`python manage.py runserver`
 
-Funcionalidad "Corazón"
+**Abrir en el navegador:**
 
-Para probar la funcionalidad de favoritos:
+http://127.0.0.1:8000/ o http://localhost:8000/
+ 
+## Estructura de Archivos
 
-    Registrar y/o Iniciar sesión con un usuario.
-    Ir a la sección "Reportes".
-    Rellenar lo que se pide y enviar el reporte.
-    Verificar que se haya creado correctamente el Reporte.
+### Archivos estáticos
+*static/*
 
-Estructura del proyecto
+**Contiene hojas de estilo, imágenes y archivos JavaScript.**
 
-reportesproyecto/
+### Archivos subidos por usuarios
+*media/*
+
+**Contiene las imágenes asociadas a los reportes.**
+
+### Base de datos
+*db.sqlite3*
+
+**Base de datos SQLite utilizada durante el desarrollo.**
+
+### Exportación de Reportes
+**Los reportes pueden exportarse a un archivo comprimido .zip que contiene:**
+
+reports_export.zip
+
 │
-├── assets/
-├── posts/
-├── reportesproyecto/
-├── static/
-├── templates/
-├── users/
-├── manage.py
-├── db.sqlite3
-├── requirements.txt
-└── README.md
+
+├── reports.xlsx
+
+│
+
+└── images/
+
+├── report_0001_imagen.jpg
+
+├── report_0002_imagen.jpg
+
+└── ...
+
+## El archivo Excel incluye:
++ Datos de cada reporte.
++ Usuario que realizó el reporte.
++ Fecha de creación.
++ Categoría patrimonial.
++ Coordenadas geográficas.
++ Enlace directo a *Google Maps*.
++ Hoja de resumen con estadísticas generales.
+
+## Tecnologías Utilizadas
++ *Python*
++ *Django*
++ *SQLite*
++ *OpenPyXL*
++ *Pillow*
++ *HTML*
++ *CSS*
++ *JavaScript*
+### Hecho por Grupo 8 "SalvaRamos"
+
+<img src="reportesproyecto/static/images/v4o8ngkvx9th1.jpeg" width="200">
