@@ -14,6 +14,12 @@ class CreatePost(forms.ModelForm):
             'longitude'
         ]
 
+        labels = {
+            'title': 'Título',
+            'body': 'Descripción',
+            'banner': 'Imágen',
+        }
+
         widgets = {
             'latitude': forms.HiddenInput(),
             'longitude': forms.HiddenInput(),

@@ -31,7 +31,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function updateCounter() {
         const len = textarea.value.length;
-        counter.textContent = `${len} / 200 characters`;
+
+        let icon = "📝";
+
+        if (len >= 100) icon = "✍️";
+        if (len >= 200) icon = "✅";
+
+        counter.textContent = `${icon} ${len} / 200 caracteres`;
+
         counter.style.color = len >= 200 ? "green" : "red";
     }
 
