@@ -234,3 +234,17 @@ a { color: var(--verde); }
 
 .btn-secondary { border: 2px solid #fff; color: #fff; }
 .btn-secondary:hover { background: rgba(255, 255, 255, 0.15); }
+
+.banner {
+    width: 100%;
+    max-height: 500px;
+    height: auto;
+    object-fit: contain;
+    border-radius: 8px;
+}
+
+.report-body {
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    white-space: pre-wrap;
+}

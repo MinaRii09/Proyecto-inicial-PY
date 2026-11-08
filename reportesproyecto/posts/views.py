@@ -1,5 +1,6 @@
 import io, zipfile
 from datetime import datetime
+from django.utils import timezone
 from openpyxl import Workbook
 from openpyxl.styles import Font, Alignment, PatternFill
 from django.shortcuts import render, redirect, get_object_or_404
@@ -132,7 +133,7 @@ def export_reports(request):
                 report.body,
                 report.get_categoria_display(),
                 report.author.username,
-                report.date.strftime("%d/%m/%Y %H:%M"),
+                timezone.localtime(report.date).strftime("%d/%m/%Y %H:%M"),
                 report.banner.name if report.banner else '',
                 lat,
                 lng,
