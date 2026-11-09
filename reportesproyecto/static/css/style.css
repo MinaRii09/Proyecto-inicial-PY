@@ -318,3 +318,4 @@ a { color: var(--verde); }
     .contraste { grid-template-columns: 1fr; }
     .contraste img { height: 260px; }
 }
+}

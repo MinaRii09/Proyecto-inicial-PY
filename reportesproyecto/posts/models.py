@@ -10,12 +10,12 @@ class Post(models.Model):
             MinLengthValidator(200, message="El reporte debe tener una descripción del al menos 200 caracteres.")]
     )
     date = models.DateTimeField(auto_now_add=True)
-    banner = models.ImageField(default='fallback.png', blank=True)
+    banner = models.ImageField(upload_to="posts/")
     author = models.ForeignKey(User, on_delete=models.CASCADE, default=None)
 
     # Google Maps location
-    latitude = models.FloatField(null=True, blank=True)
-    longitude = models.FloatField(null=True, blank=True)
+    latitude = models.FloatField()
+    longitude = models.FloatField()
     CATEGORIAS = [
     ('incendio', '🔥 Incendio Patrimonial'),
     ('derrumbe', '🏚️ Derrumbe'),
@@ -29,7 +29,6 @@ class Post(models.Model):
     categoria = models.CharField(
         max_length=20,
         choices=CATEGORIAS,
-        default='grafiti'
     )
     def __str__(self):
         return self.title
