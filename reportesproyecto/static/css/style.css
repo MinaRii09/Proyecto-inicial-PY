@@ -278,3 +278,43 @@ a { color: var(--verde); }
 .filter-form button {
     padding: 8px 15px;
 }
+
+/* ---------- Comparación 2003 / Hoy (pegar al final de style.css) ---------- */
+.contraste {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.25rem;
+    margin: 1.5rem 0;
+}
+
+.contraste figure { margin: 0; }
+
+.contraste img {
+    width: 100%;
+    height: 380px;
+    object-fit: cover;          /* recorta sin deformar la foto */
+    border-radius: 8px;
+    display: block;
+}
+
+/* La portada del diario es vertical: mostramos la parte de arriba (título) */
+.contraste img.contraste-izq { object-position: top; }
+
+.contraste figcaption {
+    margin-top: 0.5rem;
+    font-size: 1rem;
+    color: #475569;
+}
+
+.contraste figcaption strong {
+    display: block;
+    font-family: "Bricolage Grotesque", sans-serif;
+    font-size: 1.3rem;
+    color: var(--azul);
+}
+
+/* En celular, una foto debajo de la otra */
+@media (max-width: 600px) {
+    .contraste { grid-template-columns: 1fr; }
+    .contraste img { height: 260px; }
+}

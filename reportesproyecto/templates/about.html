@@ -1,4 +1,5 @@
 {% extends 'layout.html' %}
+{% load static %}
 
 {% block title %}
     Info
@@ -10,4 +11,34 @@
         Este proyecto recoge reportes de la ciudadanía sobre patrimonio cultural
         dañado en la ciudad de Valparaíso.
     </p>
+
+    <h2>Por qué existe esta página</h2>
+    <p>
+        En 2003 la UNESCO declaró a Valparaíso Patrimonio de la Humanidad.
+        Hoy, muchos de esos edificios están abandonados o deteriorados.
+        Entre todos podemos avisar dónde están.
+    </p>
+
+    <div class="contraste">
+        <figure>
+            <img src="{% static 'images/valpo.prime.jpg' %}"
+                 alt="Portada de El Mercurio de Valparaíso del 3 de julio de 2003: «¡Grande Valparaíso!»"
+                 class="contraste-izq">
+            <figcaption>
+                <strong>2003</strong>
+                Valparaíso es declarado Patrimonio de la Humanidad.
+            </figcaption>
+        </figure>
+
+        <figure>
+            <img src="{% static 'images/valpo.antiprime.jpg' %}"
+                 alt="Edificio patrimonial abandonado y con grafitis en Valparaíso">
+            <figcaption>
+                <strong>Hoy</strong>
+                Edificios patrimoniales abandonados y deteriorados.
+            </figcaption>
+        </figure>
+    </div>
+
+    <p>¿Viste un lugar así? <a href="{% url 'posts:new-post' %}">Repórtalo aquí.</a></p>
 {% endblock %}
