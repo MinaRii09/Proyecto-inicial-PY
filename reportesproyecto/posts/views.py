@@ -12,8 +12,22 @@ from . import forms
 
 
 def posts_list(request):
-    posts = Post.objects.all().order_by('-date')
-    return render(request, 'posts/posts_list.html', {'posts' : posts})
+    posts = Post.objects.all()
+
+    categoria = request.GET.get('categoria')
+    orden = request.GET.get('orden')
+
+    if categoria:
+        posts = posts.filter(categoria=categoria)
+
+    if orden == 'antiguos':
+        posts = posts.order_by('date')
+    else:
+        posts = posts.order_by('-date')
+
+    return render(request, 'posts/posts_list.html', {
+        'posts': posts
+    })
 
 
 def post_page(request, pk):

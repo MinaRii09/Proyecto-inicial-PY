@@ -12,7 +12,13 @@
             alt="{{ post.title}}"
         />
         <h1>{{ post.title }}</h1>
-            <p>{{ post.date }}</p>
+            <div class="report-meta">
+                <p>{{ post.date }}</p>
+
+                <span class="report-categoria">
+                    {{ post.get_categoria_display }}
+                </span>
+            </div>
             <p class="report-body">{{ post.body }}</p>
             <div id="map" style="height:400px;"></div>
     </section>

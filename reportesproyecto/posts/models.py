@@ -17,13 +17,13 @@ class Post(models.Model):
     latitude = models.FloatField(null=True, blank=True)
     longitude = models.FloatField(null=True, blank=True)
     CATEGORIAS = [
-        ('incendio', 'Incendio Patrimonial'),
-        ('derrumbe', 'Derrumbe'),
-        ('grafiti', 'Grafiti o Vandalismo'),
-        ('abandono', 'Abandono de Inmueble'),
-        ('demolicion', 'Demolición'),
-        ('monumento', 'Daño a Monumento Histórico'),
-        ('ascensor', 'Daño a Ascensor Patrimonial'),
+    ('incendio', '🔥 Incendio Patrimonial'),
+    ('derrumbe', '🏚️ Derrumbe'),
+    ('grafiti', '🎨 Grafiti o Vandalismo'),
+    ('abandono', '🏠 Abandono de Inmueble'),
+    ('demolicion', '🚧 Demolición'),
+    ('monumento', '🗿 Daño a Monumento Histórico'),
+    ('ascensor', '🛗 Daño a Ascensor Patrimonial'),
     ]
 
     categoria = models.CharField(

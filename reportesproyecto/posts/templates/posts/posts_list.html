@@ -8,6 +8,68 @@
     <section>
     <h1>Reportes</h1>
 
+    <form method="get" class="filter-form">
+
+        <select name="categoria">
+            <option value=""
+                {% if request.GET.categoria == "" %}selected{% endif %}>
+                📂 Todas las categorías
+            </option>
+
+            <option value="incendio"
+                {% if request.GET.categoria == "incendio" %}selected{% endif %}>
+                🔥 Incendio Patrimonial
+            </option>
+
+            <option value="derrumbe"
+                {% if request.GET.categoria == "derrumbe" %}selected{% endif %}>
+                🏚️ Derrumbe
+            </option>
+
+            <option value="grafiti"
+                {% if request.GET.categoria == "grafiti" %}selected{% endif %}>
+                🎨 Grafiti o Vandalismo
+            </option>
+
+            <option value="abandono"
+                {% if request.GET.categoria == "abandono" %}selected{% endif %}>
+                🏠 Abandono de Inmueble
+            </option>
+
+            <option value="demolicion"
+                {% if request.GET.categoria == "demolicion" %}selected{% endif %}>
+                🚧 Demolición
+            </option>
+
+            <option value="monumento"
+                {% if request.GET.categoria == "monumento" %}selected{% endif %}>
+                🗿 Daño a Monumento Histórico
+            </option>
+
+            <option value="ascensor"
+                {% if request.GET.categoria == "ascensor" %}selected{% endif %}>
+                🛗 Daño a Ascensor Patrimonial
+            </option>
+        </select>
+
+        <select name="orden">
+            <option value="recientes"
+                {% if request.GET.orden == "recientes" %}selected{% endif %}>
+                🆕 Más recientes
+            </option>
+
+            <option value="antiguos"
+                {% if request.GET.orden == "antiguos" %}selected{% endif %}>
+                📜 Más antiguos
+            </option>
+        </select>
+
+        <button type="submit">
+            🔍 Aplicar Filtros
+        </button>
+
+    </form>
+
     {% for post in posts %}
         <article class="post">
             <a href="{% url 'posts:page' pk=post.pk %}">
@@ -19,7 +81,13 @@
                 >
             </a>
 
-            <p>{{ post.date }} by {{ post.author }} </p>
+            <div class="report-meta">
+                <p>{{ post.date }} by {{ post.author }}</p>
+
+                <span class="report-categoria">
+                    {{ post.get_categoria_display }}
+                </span>
+            </div>
             <p class="report-body">{{ post.body }}</p>
         </article>
     {% endfor %}

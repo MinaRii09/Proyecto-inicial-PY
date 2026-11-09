@@ -248,3 +248,33 @@ a { color: var(--verde); }
     word-wrap: break-word;
     white-space: pre-wrap;
 }
+
+.report-meta {
+    display: flex;
+    align-items: center;
+}
+
+.report-categoria {
+    margin-left: auto;
+    background-color: #e8eef7;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-weight: bold;
+}
+
+.filter-form {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+.filter-form select {
+    flex: 1;
+    min-width: 220px;
+}
+
+.filter-form button {
+    padding: 8px 15px;
+}
