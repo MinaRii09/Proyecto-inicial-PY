@@ -94,6 +94,20 @@ def export_reports(request):
             "Reportes con imagen",
             con_imagen
         ])
+
+        summary.append([])
+        summary.append(["Reportes por estado", "Cantidad"])
+
+        for codigo, nombre in Post.ESTADOS:
+            cantidad = Post.objects.filter(
+                estado=codigo
+            ).count()
+            
+            summary.append([
+                nombre,
+                cantidad
+        ])
+
         header_fill = PatternFill(
             fill_type="solid",
             start_color="1F4E78"
@@ -125,6 +139,7 @@ def export_reports(request):
             'Título',
             'Descripción',
             'Categoría',
+            'Estado',
             'Usuario',
             'Fecha de reporte',
             'Imagen Adjunta',
@@ -149,6 +164,7 @@ def export_reports(request):
                 report.title,
                 report.body,
                 report.get_categoria_display(),
+                report.get_estado_display(),
                 report.author.username,
                 timezone.localtime(report.date).strftime("%d/%m/%Y %H:%M"),
                 report.banner.name if report.banner else '',
@@ -157,7 +173,7 @@ def export_reports(request):
                 maps_link,
             ])
             current_row = ws.max_row
-            maps_cell = ws.cell(row=current_row, column=10)
+            maps_cell = ws.cell(row=current_row, column=11)
             maps_cell.hyperlink = maps_link
             maps_cell.style = "Hyperlink"
             maps_cell.value = "Abrir ubicación"
