@@ -30,12 +30,10 @@ document.addEventListener('DOMContentLoaded', function () {
         14
     );
 
-    L.tileLayer(
-        'https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}',
-        {
-            attribution: 'Tiles © Esri'
-        }
-    ).addTo(map);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 19,
+        attribution: '&copy; Colaboradores de OpenStreetMap'
+    }).addTo(map);
 
     L.marker([
         {{ post.latitude }},
