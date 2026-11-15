@@ -1,0 +1,92 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+    Mapa de reportes
+{% endblock %}
+
+{% block content %}
+    <h1>Mapa de reportes</h1>
+    <p>Cada punto es un reporte. Haz clic para ver la foto y la categoría.</p>
+
+    <div id="mapa-general"></div>
+    <ul id="leyenda" class="leyenda"></ul>
+
+    <!-- Los datos pasan de Django a JavaScript de forma segura -->
+    {{ datos|json_script:"datos-mapa" }}
+
+    <script>
+    // Se espera a DOMContentLoaded porque leaflet.js se carga al final del <body>
+    document.addEventListener('DOMContentLoaded', function () {
+        var datos = JSON.parse(document.getElementById('datos-mapa').textContent);
+
+        // Centro inicial: Valparaíso
+        var mapa = L.map('mapa-general').setView([-33.0458, -71.6197], 14);
+
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            attribution: '&copy; Colaboradores de OpenStreetMap'
+        }).addTo(mapa);
+
+        // Un color por categoría
+        var colores = ['#c8553d', '#1f3a5f', '#2e7d6b', '#e0a526', '#7c3aed', '#0891b2'];
+        var colorDe = {};
+        function color(cat) {
+            if (!(cat in colorDe)) {
+                colorDe[cat] = colores[Object.keys(colorDe).length % colores.length];
+            }
+            return colorDe[cat];
+        }
+
+        function crear(tag, texto) {
+            var el = document.createElement(tag);
+            el.textContent = texto;   // textContent evita que se inyecte HTML
+            return el;
+        }
+
+        var puntos = [];
+        datos.forEach(function (d) {
+            var popup = document.createElement('div');
+            popup.appendChild(crear('strong', d.titulo));
+            popup.appendChild(document.createElement('br'));
+            popup.appendChild(crear('span', d.categoria));
+            var enlace = document.createElement('a');
+            enlace.href = d.url;
+            enlace.textContent = 'Ver reporte';
+            enlace.style.cssText = 'display:block;margin-top:6px';
+            popup.appendChild(enlace);
+
+            if (d.foto) {
+                var img = document.createElement('img');
+                img.src = d.foto;
+                img.alt = d.titulo;
+                img.style.cssText = 'width:200px;margin-top:6px;border-radius:6px;display:block';
+                popup.appendChild(img);
+            }
+
+            L.circleMarker([d.lat, d.lng], {
+                radius: 9, color: '#fff', weight: 2,
+                fillColor: color(d.categoria), fillOpacity: 0.95
+            }).addTo(mapa).bindPopup(popup);
+
+            puntos.push([d.lat, d.lng]);
+        });
+
+        // Ajusta el zoom para que se vean todos los reportes
+        if (puntos.length > 0) {
+            mapa.fitBounds(puntos, { padding: [40, 40], maxZoom: 16 });
+        }
+
+        // Leyenda de colores
+        var leyenda = document.getElementById('leyenda');
+        Object.keys(colorDe).forEach(function (cat) {
+            var li = document.createElement('li');
+            var punto = document.createElement('span');
+            punto.className = 'leyenda-punto';
+            punto.style.background = colorDe[cat];
+            li.appendChild(punto);
+            li.appendChild(document.createTextNode(' ' + cat));
+            leyenda.appendChild(li);
+        });
+    });
+    </script>
+{% endblock %}

@@ -318,3 +318,30 @@ a { color: var(--verde); }
     .contraste { grid-template-columns: 1fr; }
     .contraste img { height: 260px; }
 }
+#mapa-general {
+    height: 520px;
+    border-radius: 8px;
+    border: 1px solid var(--borde);
+}
+ 
+.leyenda {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 1.25rem;
+    padding: 0;
+    margin: 1rem 0 0;
+    font-size: 1rem;
+}
+ 
+.leyenda-punto {
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    vertical-align: middle;
+}
+ 
+@media (max-width: 600px) {
+    #mapa-general { height: 380px; }
+}

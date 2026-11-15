@@ -8,6 +8,9 @@ from django.http import HttpResponse
 from .models import Post
 from django.contrib.auth.decorators import login_required
 from . import forms
+from django.shortcuts import render
+from django.urls import reverse
+from .models import Post
 # Create your views here.
 
 
@@ -211,3 +214,16 @@ def export_reports(request):
         'attachment; filename="reports_export.zip"'
     )
     return response
+
+def mapa(request):
+    datos = []
+    for p in Post.objects.all():
+        datos.append({
+            "titulo": p.title,
+            "categoria": p.get_categoria_display(),
+            "lat": p.latitude,
+            "lng": p.longitude,
+            "foto": p.banner.url if p.banner else "",
+            "url": reverse("posts:page", args=[p.pk]),
+        })
+    return render(request, "mapa.html", {"datos": datos})

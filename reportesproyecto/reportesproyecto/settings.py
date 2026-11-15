@@ -118,6 +118,8 @@ USE_TZ = True
 STATIC_URL = 'static/'
 MEDIA_URL = 'media/'
 
+SECURE_REFERRER_POLICY = "strict-origin-when-cross-origin"
+
 STATIC_ROOT = BASE_DIR / 'assets'
 MEDIA_ROOT = BASE_DIR / 'media'
 

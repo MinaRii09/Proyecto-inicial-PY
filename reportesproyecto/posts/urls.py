@@ -8,4 +8,5 @@ urlpatterns = [
     path('new-post/', views.post_new, name="new-post"),
     path('<int:pk>', views.post_page, name="page"),
     path("export-reports/", views.export_reports, name="export-reports"),
+    path('mapa/', views.mapa, name="mapa"),
 ]
