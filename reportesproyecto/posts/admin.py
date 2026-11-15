@@ -1,13 +1,15 @@
 from django.contrib import admin
 from django.urls import path
 from django.shortcuts import redirect
-
 from .models import Post
 
 
 @admin.register(Post)
 class PostAdmin(admin.ModelAdmin):
-
+    list_display = ('title', 'categoria', 'estado', 'author', 'date')
+    list_editable = ('estado',)
+    list_filter = ('estado', 'categoria')
+    search_fields = ('title', 'body')
     def get_urls(self):
         urls = super().get_urls()
 

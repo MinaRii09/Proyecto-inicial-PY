@@ -225,5 +225,7 @@ def mapa(request):
             "lng": p.longitude,
             "foto": p.banner.url if p.banner else "",
             "url": reverse("posts:page", args=[p.pk]),
+            "estado": p.estado,
+            "estado_texto": p.get_estado_display(),
         })
     return render(request, "mapa.html", {"datos": datos})

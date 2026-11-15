@@ -345,3 +345,13 @@ a { color: var(--verde); }
 @media (max-width: 600px) {
     #mapa-general { height: 380px; }
 }
+.estado {
+    display: inline-block;
+    padding: 0.15rem 0.7rem;
+    border-radius: 999px;
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+.estado-pendiente { background: #fef3c7; color: #92400e; }
+.estado-revision  { background: #dbeafe; color: #1e40af; }
+.estado-resuelto  { background: #d1fae5; color: #065f46; }

@@ -49,6 +49,9 @@
             popup.appendChild(crear('strong', d.titulo));
             popup.appendChild(document.createElement('br'));
             popup.appendChild(crear('span', d.categoria));
+            var iconos = { pendiente: '🟠', revision: '🔵', resuelto: '🟢' };
+            popup.appendChild(crear('div', (iconos[d.estado] || '') + ' Estado: ' + d.estado_texto));
+            popup.appendChild(crear('div', 'Estado: ' + d.estado_texto));
             var enlace = document.createElement('a');
             enlace.href = d.url;
             enlace.textContent = 'Ver reporte';

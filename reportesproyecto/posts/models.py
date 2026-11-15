@@ -30,5 +30,16 @@ class Post(models.Model):
         max_length=20,
         choices=CATEGORIAS,
     )
+    ESTADOS = [
+        ('pendiente', 'Pendiente'),
+        ('revision', 'En revisión'),
+        ('resuelto', 'Resuelto'),
+    ]
+
+    estado = models.CharField(
+        max_length=20,
+        choices=ESTADOS,
+        default='pendiente',
+    )
     def __str__(self):
         return self.title
