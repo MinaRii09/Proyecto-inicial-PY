@@ -19,7 +19,7 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
     <script src="{% static 'js/main.js' %}" defer></script>
 </head>
-<body>
+<body class="{% block body_class %}{% endblock %}">
 
     <nav class="navbar">
         <a href="/" class="navbar-brand">SalvaRamos</a>

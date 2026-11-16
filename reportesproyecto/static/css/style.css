@@ -355,3 +355,77 @@ a { color: var(--verde); }
 .estado-pendiente { background: #fef3c7; color: #92400e; }
 .estado-revision  { background: #dbeafe; color: #1e40af; }
 .estado-resuelto  { background: #d1fae5; color: #065f46; }
+
+.badge-nivel {
+    display: inline-block;
+    padding: 0.15rem 0.7rem;
+    border-radius: 999px;
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+.nivel-1 {
+    background: #dcfce7;
+    color: #166534;
+}
+
+.nivel-2 {
+    background: #dbeafe;
+    color: #1e40af;
+}
+
+.nivel-3 {
+    background: #fef3c7;
+    color: #92400e;
+}
+
+.nivel-4 {
+    background: #fed7aa;
+    color: #c2410c;
+}
+
+.nivel-5 {
+    background: #fee2e2;
+    color: #991b1b;
+}
+
+
+.bg-post-page {
+background-image: url("/static/images/posts_lista_page.jpg");
+background-size: cover;
+background-position: center;
+background-repeat: no-repeat;
+background-attachment: fixed;
+}
+
+.bg-post-list {
+background-image: url("/static/images/posts_listado.jpg");
+background-size: cover;
+background-position: center;
+background-repeat: no-repeat;
+background-attachment: fixed;
+}
+
+.bg-about {
+background-image: url("/static/images/cerro.jpg");
+background-size: cover;
+background-position: center;
+background-repeat: no-repeat;
+background-attachment: fixed;
+}
+
+.bg-mapa {
+background-image: url("/static/images/mapa.jpg");
+background-size: cover;
+background-position: center;
+background-repeat: no-repeat;
+background-attachment: fixed;
+}
+
+.bg-nuevo {
+background-image: url("/static/images/nuevo_reporte.jpg");
+background-size: cover;
+background-position: center;
+background-repeat: no-repeat;
+background-attachment: fixed;
+}

@@ -94,22 +94,6 @@ def export_reports(request):
         ).count()
 
         summary.append([])
-
-        summary.append([
-            "Exportado por",
-            request.user.username
-        ])
-        summary.append([
-            "Fecha de exportación",
-            datetime.now().strftime("%d/%m/%Y %H:%M")
-        ])
-
-        summary.append([
-            "Reportes con imagen",
-            con_imagen
-        ])
-
-        summary.append([])
         summary.append(["Reportes por estado", "Cantidad"])
 
         for codigo, nombre in Post.ESTADOS:
@@ -120,6 +104,17 @@ def export_reports(request):
             summary.append([
                 nombre,
                 cantidad
+        ])
+            
+        summary.append([])
+        summary.append([
+            "Exportado por",
+            request.user.username
+        ])
+        
+        summary.append([
+            "Fecha de exportación",
+            datetime.now().strftime("%d/%m/%Y %H:%M")
         ])
 
         header_fill = PatternFill(
@@ -154,6 +149,7 @@ def export_reports(request):
             'Descripción',
             'Categoría',
             'Nivel de importancia',
+            'Estado',
             'Usuario',
             'Fecha de reporte',
             'Imagen Adjunta',
@@ -179,6 +175,7 @@ def export_reports(request):
                 report.body,
                 report.get_categoria_display(),
                 report.get_nivel_display(),
+                report.get_estado_display(),
                 report.author.username,
                 timezone.localtime(report.date).strftime("%d/%m/%Y %H:%M"),
                 report.banner.name if report.banner else '',
@@ -187,7 +184,7 @@ def export_reports(request):
                 maps_link,
             ])
             current_row = ws.max_row
-            maps_cell = ws.cell(row=current_row, column=11)
+            maps_cell = ws.cell(row=current_row, column=12)
             maps_cell.hyperlink = maps_link
             maps_cell.style = "Hyperlink"
             maps_cell.value = "Abrir ubicación"
