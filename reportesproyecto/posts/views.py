@@ -108,6 +108,20 @@ def export_reports(request):
             "Reportes con imagen",
             con_imagen
         ])
+
+        summary.append([])
+        summary.append(["Reportes por estado", "Cantidad"])
+
+        for codigo, nombre in Post.ESTADOS:
+            cantidad = Post.objects.filter(
+                estado=codigo
+            ).count()
+            
+            summary.append([
+                nombre,
+                cantidad
+        ])
+
         header_fill = PatternFill(
             fill_type="solid",
             start_color="1F4E78"
