@@ -11,15 +11,12 @@
     <div id="mapa-general"></div>
     <ul id="leyenda" class="leyenda"></ul>
 
-    <!-- Los datos pasan de Django a JavaScript de forma segura -->
     {{ datos|json_script:"datos-mapa" }}
 
     <script>
-    // Se espera a DOMContentLoaded porque leaflet.js se carga al final del <body>
     document.addEventListener('DOMContentLoaded', function () {
         var datos = JSON.parse(document.getElementById('datos-mapa').textContent);
 
-        // Centro inicial: Valparaíso
         var mapa = L.map('mapa-general').setView([-33.0458, -71.6197], 14);
 
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -27,31 +24,35 @@
             attribution: '&copy; Colaboradores de OpenStreetMap'
         }).addTo(mapa);
 
-        // Un color por categoría
-        var colores = ['#c8553d', '#1f3a5f', '#2e7d6b', '#e0a526', '#7c3aed', '#0891b2'];
-        var colorDe = {};
-        function color(cat) {
-            if (!(cat in colorDe)) {
-                colorDe[cat] = colores[Object.keys(colorDe).length % colores.length];
-            }
-            return colorDe[cat];
-        }
+        var NIVELES = {
+            1: { nombre: 'Leve',       color: '#2e9e5b' },
+            2: { nombre: 'Moderado',   color: '#8bb934' },
+            3: { nombre: 'Importante', color: '#e0a800' },
+            4: { nombre: 'Grave',      color: '#e8730c' },
+            5: { nombre: 'Crítico',    color: '#c62828' }
+        };
 
         function crear(tag, texto) {
             var el = document.createElement(tag);
-            el.textContent = texto;   // textContent evita que se inyecte HTML
+            el.textContent = texto;
             return el;
         }
 
+        datos.sort(function (a, b) { return a.nivel - b.nivel; });
+
         var puntos = [];
+        var iconos = { pendiente: '🟠', revision: '🔵', resuelto: '🟢' };
+
         datos.forEach(function (d) {
+            var info = NIVELES[d.nivel] || NIVELES[3];
+
             var popup = document.createElement('div');
             popup.appendChild(crear('strong', d.titulo));
             popup.appendChild(document.createElement('br'));
             popup.appendChild(crear('span', d.categoria));
-            var iconos = { pendiente: '🟠', revision: '🔵', resuelto: '🟢' };
+            popup.appendChild(crear('div', '⚠️ Nivel: ' + d.nivel_texto));
             popup.appendChild(crear('div', (iconos[d.estado] || '') + ' Estado: ' + d.estado_texto));
-            popup.appendChild(crear('div', 'Estado: ' + d.estado_texto));
+
             var enlace = document.createElement('a');
             enlace.href = d.url;
             enlace.textContent = 'Ver reporte';
@@ -67,27 +68,26 @@
             }
 
             L.circleMarker([d.lat, d.lng], {
-                radius: 9, color: '#fff', weight: 2,
-                fillColor: color(d.categoria), fillOpacity: 0.95
+                radius: 6 + d.nivel,
+                color: '#fff', weight: 2,
+                fillColor: info.color, fillOpacity: 0.95
             }).addTo(mapa).bindPopup(popup);
 
             puntos.push([d.lat, d.lng]);
         });
 
-        // Ajusta el zoom para que se vean todos los reportes
         if (puntos.length > 0) {
             mapa.fitBounds(puntos, { padding: [40, 40], maxZoom: 16 });
         }
 
-        // Leyenda de colores
         var leyenda = document.getElementById('leyenda');
-        Object.keys(colorDe).forEach(function (cat) {
+        [1, 2, 3, 4, 5].forEach(function (n) {
             var li = document.createElement('li');
             var punto = document.createElement('span');
             punto.className = 'leyenda-punto';
-            punto.style.background = colorDe[cat];
+            punto.style.background = NIVELES[n].color;
             li.appendChild(punto);
-            li.appendChild(document.createTextNode(' ' + cat));
+            li.appendChild(document.createTextNode(' ' + NIVELES[n].nombre));
             leyenda.appendChild(li);
         });
     });

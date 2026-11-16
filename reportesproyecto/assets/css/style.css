@@ -204,3 +204,46 @@ body {
 nav, nav a, nav button {
     font-family: 'Georgia', 'Times New Roman', serif !important;
 }
+#id_nivel {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin: 8px 0 20px;
+}
+#id_nivel > div { margin: 0; }
+#id_nivel label {
+  display: inline-block;
+  padding: 8px 16px;
+  border-radius: 20px;
+  border: 2px solid transparent;
+  color: #fff;
+  cursor: pointer;
+  font-weight: 600;
+  opacity: 0.5;
+  transition: opacity .15s, transform .15s;
+}
+#id_nivel input { display: none; }
+#id_nivel label:has(input:checked) {
+  opacity: 1;
+  transform: scale(1.08);
+  border-color: #1f3a5f;
+}
+#id_nivel > div:nth-child(1) label { background: #2e9e5b; }
+#id_nivel > div:nth-child(2) label { background: #8bb934; }
+#id_nivel > div:nth-child(3) label { background: #e0a800; }
+#id_nivel > div:nth-child(4) label { background: #e8730c; }
+#id_nivel > div:nth-child(5) label { background: #c62828; }
+
+.badge-nivel {
+  display: inline-block;
+  padding: 3px 12px;
+  border-radius: 12px;
+  color: #fff;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+.nivel-1 { background: #2e9e5b; }
+.nivel-2 { background: #8bb934; }
+.nivel-3 { background: #e0a800; }
+.nivel-4 { background: #e8730c; }
+.nivel-5 { background: #c62828; }

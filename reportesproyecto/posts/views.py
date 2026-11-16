@@ -5,26 +5,29 @@ from openpyxl import Workbook
 from openpyxl.styles import Font, Alignment, PatternFill
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
-from .models import Post
 from django.contrib.auth.decorators import login_required
-from . import forms
-from django.shortcuts import render
 from django.urls import reverse
+from . import forms
 from .models import Post
-# Create your views here.
 
 
 def posts_list(request):
     posts = Post.objects.all()
 
     categoria = request.GET.get('categoria')
+    nivel = request.GET.get('nivel')
     orden = request.GET.get('orden')
 
     if categoria:
         posts = posts.filter(categoria=categoria)
 
+    if nivel:
+        posts = posts.filter(nivel=nivel)
+
     if orden == 'antiguos':
         posts = posts.order_by('date')
+    elif orden == 'importancia':
+        posts = posts.order_by('-nivel', '-date')
     else:
         posts = posts.order_by('-date')
 
@@ -35,7 +38,8 @@ def posts_list(request):
 
 def post_page(request, pk):
     post = get_object_or_404(Post, pk=pk)
-    return render(request, 'posts/post_page.html', {'post' : post})
+    return render(request, 'posts/post_page.html', {'post': post})
+
 
 @login_required(login_url="/users/login/")
 def post_new(request):
@@ -48,7 +52,8 @@ def post_new(request):
             return redirect('posts:list')
     else:
         form = forms.CreatePost()
-    return render(request, 'posts/post_new.html', { 'form': form })
+    return render(request, 'posts/post_new.html', {'form': form})
+
 
 @login_required(login_url="/users/login/")
 def export_reports(request):
@@ -75,10 +80,19 @@ def export_reports(request):
                 nombre,
                 cantidad
             ])
+
+        summary.append([])
+        summary.append(["Reportes por nivel", "Cantidad"])
+        for valor, nombre in Post.NIVELES:
+            summary.append([
+                nombre,
+                Post.objects.filter(nivel=valor).count()
+            ])
+
         con_imagen = Post.objects.exclude(
             banner=''
         ).count()
-        
+
         summary.append([])
 
         summary.append([
@@ -100,11 +114,11 @@ def export_reports(request):
         )
         for cell in summary[1]:
             cell.font = Font(
-            bold=True,
-            color="FFFFFF"
+                bold=True,
+                color="FFFFFF"
             )
             cell.fill = header_fill
-        
+
         for column in summary.columns:
             max_length = 0
             column_letter = column[0].column_letter
@@ -125,6 +139,7 @@ def export_reports(request):
             'Título',
             'Descripción',
             'Categoría',
+            'Nivel de importancia',
             'Usuario',
             'Fecha de reporte',
             'Imagen Adjunta',
@@ -132,7 +147,7 @@ def export_reports(request):
             'Longitud',
             'Google Maps'
         ]
-        
+
         ws.append(headers)
 
         for report in reports:
@@ -149,6 +164,7 @@ def export_reports(request):
                 report.title,
                 report.body,
                 report.get_categoria_display(),
+                report.get_nivel_display(),
                 report.author.username,
                 timezone.localtime(report.date).strftime("%d/%m/%Y %H:%M"),
                 report.banner.name if report.banner else '',
@@ -157,7 +173,7 @@ def export_reports(request):
                 maps_link,
             ])
             current_row = ws.max_row
-            maps_cell = ws.cell(row=current_row, column=10)
+            maps_cell = ws.cell(row=current_row, column=11)
             maps_cell.hyperlink = maps_link
             maps_cell.style = "Hyperlink"
             maps_cell.value = "Abrir ubicación"
@@ -215,6 +231,7 @@ def export_reports(request):
     )
     return response
 
+
 def mapa(request):
     datos = []
     for p in Post.objects.all():
@@ -227,5 +244,7 @@ def mapa(request):
             "url": reverse("posts:page", args=[p.pk]),
             "estado": p.estado,
             "estado_texto": p.get_estado_display(),
+            "nivel": p.nivel,
+            "nivel_texto": p.get_nivel_display(),
         })
     return render(request, "mapa.html", {"datos": datos})

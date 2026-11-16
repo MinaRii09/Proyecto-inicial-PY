@@ -1,4 +1,4 @@
-{%extends 'layout.html'%}
+{% extends 'layout.html' %}
 
 {% block title %}
     Reportes
@@ -62,6 +62,20 @@
                 {% if request.GET.orden == "antiguos" %}selected{% endif %}>
                 📜 Más antiguos
             </option>
+
+            <option value="importancia"
+                {% if request.GET.orden == "importancia" %}selected{% endif %}>
+                🚨 Más importantes primero
+            </option>
+        </select>
+
+        <select name="nivel">
+            <option value="">⚠️ Todos los niveles</option>
+            <option value="1" {% if request.GET.nivel == "1" %}selected{% endif %}>Leve</option>
+            <option value="2" {% if request.GET.nivel == "2" %}selected{% endif %}>Moderado</option>
+            <option value="3" {% if request.GET.nivel == "3" %}selected{% endif %}>Importante</option>
+            <option value="4" {% if request.GET.nivel == "4" %}selected{% endif %}>Grave</option>
+            <option value="5" {% if request.GET.nivel == "5" %}selected{% endif %}>Crítico</option>
         </select>
 
         <button type="submit">
@@ -86,6 +100,10 @@
 
                 <span class="report-categoria">
                     {{ post.get_categoria_display }}
+                </span>
+
+                <span class="badge-nivel nivel-{{ post.nivel }}">
+                    {{ post.get_nivel_display }}
                 </span>
             </div>
             <p class="report-body">{{ post.body }}</p>

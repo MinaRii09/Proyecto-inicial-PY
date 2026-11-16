@@ -10,6 +10,7 @@ class CreatePost(forms.ModelForm):
             'body',
             'banner',
             'categoria',
+            'nivel',
             'latitude',
             'longitude'
         ]
@@ -18,6 +19,7 @@ class CreatePost(forms.ModelForm):
             'title': 'Título',
             'body': 'Descripción',
             'banner': 'Imágen',
+            'nivel': 'Nivel de importancia',
         }
 
         widgets = {
@@ -25,9 +27,11 @@ class CreatePost(forms.ModelForm):
                 'class': 'report-descripcion',
                 'rows': 5,
             }),
+            'nivel': forms.RadioSelect(),
             'latitude': forms.HiddenInput(),
             'longitude': forms.HiddenInput(),
         }
+
     def clean_title(self):
         title = self.cleaned_data['title'].strip()
 
@@ -70,13 +74,16 @@ class CreatePost(forms.ModelForm):
             )
 
         return cleaned_data
-    
+
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
         self.fields['categoria'].choices = [
             ('', 'Seleccione una categoría')
         ] + list(models.Post.CATEGORIAS)
+
+        self.fields['nivel'].choices = models.Post.NIVELES
+        self.fields['nivel'].initial = 3
 
         self.fields['latitude'].required = False
         self.fields['longitude'].required = False
