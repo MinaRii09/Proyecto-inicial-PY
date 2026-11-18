@@ -36,12 +36,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
         let icon = "📝";
 
-        if (len >= 100) icon = "✍️";
-        if (len >= 200) icon = "✅";
+        if (len >= 1) icon = "✍️";
+        if (len >= 10) icon = "✅";
 
-        counter.textContent = `${icon} ${len} / 200 caracteres`;
+        counter.textContent = `${icon} ${len} / 10 caracteres`;
 
-        counter.style.color = len >= 200 ? "green" : "red";
+        counter.style.color = len >= 10 ? "green" : "red";
     }
 
     textarea.addEventListener("input", updateCounter);
