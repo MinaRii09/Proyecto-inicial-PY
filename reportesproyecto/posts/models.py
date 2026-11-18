@@ -7,7 +7,7 @@ class Post(models.Model):
     title = models.CharField(max_length=75)
     body = models.TextField(
         validators=[
-            MinLengthValidator(200, message="El reporte debe tener una descripción del al menos 200 caracteres.")]
+            MinLengthValidator(10, message="El reporte debe tener una descripción del al menos 10 caracteres.")]
     )
     date = models.DateTimeField(auto_now_add=True)
     banner = models.ImageField(upload_to="posts/")
